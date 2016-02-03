@@ -10,6 +10,7 @@ from rest_framework.response import Response
 def document(request):
     return Response(Document(title='Test Document', url='/'))
 
+
 urlpatterns = [
     url('', document),
 ]
