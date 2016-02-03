@@ -8,7 +8,10 @@ from coreapi.transports.http import (
 from rest_framework.test import APIClient
 import json
 import uritemplate
-import urlparse
+try:
+    import urlparse
+except ImportError:
+    from urllib import parse as urlparse
 
 
 def _get_http_method(action):
