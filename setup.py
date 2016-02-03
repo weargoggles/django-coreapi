@@ -16,7 +16,7 @@ author = 'Pete Wildsmith'
 author_email = 'pete@dabapps.com'
 license = 'BSD'
 install_requires = [
-    'coreapi==1.14.1'
+    'coreapi',
 ]
 
 long_description = """Core API helpers for Django and Django Rest Framework"""

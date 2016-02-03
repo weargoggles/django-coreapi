@@ -12,4 +12,4 @@ deploy:
     secure: yRYHqlD61slyD4Vpa/M9wCmVeqeNi3mrT7/34FFL3J+wRmSLb4eRTDBXUQKnDO0v87WXxGAYD4EypBjRSgVowET82CP9/WbsvvP9Et0gLRPy2aBOGH/gj5EoocsR37ss+jReKKGn0vPSLBJjtROvPwbo7JtBKxtcX9tBNe5sk++8A/y1+ZB5cthn0YorDD5ydeT0C/8K1QBtDsekQOhJE42+3eNBCtMxvlCh1Xg11+wQbHim77XfOE8v7vevD2S+fHI01fWnzqLte/pW/vs8Z9om/gQmYkebKYElx+Jn8SK89pI95OUIhKQd4+n3cisD0FbxieR1ruXTCDGH3w+Ieh1v9BDCj+y/qFYQamNgfj8wSZ6PJ/jFuKYHt9hpQFRtOAFAdAupmJCcOEDxyU4vBAAj17JuQA8Rdb6RUYXHVZo07U+zBMq05GBx+52NZWgfP/ADNPkZvj0WMuW3Rnpc6IdA0lvOndZNuNu6sNDotlFl2pXWocXZnm84A1unJ38CQ1sBjKFPkicGWdbMGI4jgwtQ0rnzshyOWHofoMBuWhVNfFX3OtE5URuCb3lA8ILBhtl9f/EPbEngHoWmpl+O/SR0jvS2UlF8Z1EVuZkaD86qW6ORq3y2TKJ1G5g6x5QdbJjMDz4F44SLx9pv3EwXaPcYraOmrNdWDt0muh84gw0=
   on:
     tags: true
-    repo: weargoggles/django-core-api
+    repo: weargoggles/django-coreapi
