@@ -11,6 +11,15 @@ def document(request):
     return Response(Document(title='Test Document', url='/'))
 
 
+@api_view(['GET'])
+@renderer_classes([CoreAPIJSONRenderer])
+def headers(request):
+    if not request.META.get('Authorization'):
+        raise Exception('Missing header')
+    return Response(Document(title='Test Document', url='/'))
+
+
 urlpatterns = [
     url('', document),
+    url('/headers/', headers)
 ]
