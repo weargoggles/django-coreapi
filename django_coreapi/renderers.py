@@ -1,9 +1,10 @@
-from coreapi.codecs import HTMLCodec, CoreJSONCodec
+from coreapi.codecs import CoreHTMLCodec, CoreJSONCodec
 from rest_framework.renderers import BaseRenderer
 
 
 class CoreAPIJSONRenderer(BaseRenderer):
     media_type = 'application/vnd.coreapi+json'
+    charset = None
 
     def render(self, data, media_type=None, renderer_context=None):
         codec = CoreJSONCodec()
@@ -12,7 +13,9 @@ class CoreAPIJSONRenderer(BaseRenderer):
 
 class CoreAPIHTMLRenderer(BaseRenderer):
     media_type = 'text/html'
+    charset = None
 
     def render(self, data, media_type=None, renderer_context=None):
-        codec = HTMLCodec()
+        codec = CoreHTMLCodec()
+
         return codec.dump(data)

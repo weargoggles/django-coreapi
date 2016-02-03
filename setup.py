@@ -75,6 +75,8 @@ setup(
     packages=get_packages(package),
     package_data=get_package_data(package),
     install_requires=install_requires,
+    tests_require=['djangorestframework', 'django'],
+    test_suite='tests',
     classifiers=[
     ]
 )
