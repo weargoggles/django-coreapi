@@ -8,10 +8,10 @@ import os
 import sys
 
 
-name = 'django-core-api'
-package = 'django_core_api'
+name = 'django-coreapi'
+package = 'django_coreapi'
 description = 'Core API helpers for Django and Django Rest Framework'
-url = 'https://github.com/weargoggles/django-core-api'
+url = 'https://github.com/weargoggles/django-coreapi'
 author = 'Pete Wildsmith'
 author_email = 'pete@dabapps.com'
 license = 'BSD'

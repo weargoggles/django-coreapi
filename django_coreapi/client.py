@@ -4,7 +4,7 @@ from coreapi.codecs import default_decoders
 from coreapi.compat import string_types
 from coreapi.document import Link
 from coreapi.transports import determine_transport
-from project.core.transports import DjangoTestHTTPTransport
+from django_coreapi.transports import DjangoTestHTTPTransport
 import itypes
 
 
