@@ -14,7 +14,6 @@ class Tests(unittest.TestCase):
         self.assertIsNotNone(doc)
 
     def test_client_headers(self):
-        client = DjangoCoreAPIClient()
         transport = DjangoTestHTTPTransport(headers={'authorization': 'token'})
         client = DjangoCoreAPIClient(transports=[transport])
         doc = client.get('/headers/')
