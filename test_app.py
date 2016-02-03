@@ -14,12 +14,12 @@ def document(request):
 @api_view(['GET'])
 @renderer_classes([CoreAPIJSONRenderer])
 def headers(request):
-    if not request.META.get('Authorization'):
+    if not request.META.get('HTTP_AUTHORIZATION'):
         raise Exception('Missing header')
     return Response(Document(title='Test Document', url='/'))
 
 
 urlpatterns = [
+    url(r'^headers/$', headers),
     url('', document),
-    url('/headers/', headers)
 ]
