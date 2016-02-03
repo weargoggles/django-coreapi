@@ -3,7 +3,7 @@ from collections import OrderedDict
 from coreapi.codecs import default_decoders
 from coreapi.document import Document, Object, Link, Array, Error
 from coreapi.transports.http import (
-    HTTPTransport, negotiate_decoder, Error, ErrorMessage
+    HTTPTransport, negotiate_decoder, ErrorMessage
 )
 from rest_framework.test import APIClient
 import json
@@ -84,7 +84,7 @@ def _get_headers(url, decoders=None, credentials=None):
         if host in credentials:
             headers['authorization'] = credentials[host]
 
-    return headers 
+    return headers
 
 
 def _handle_inplace_replacements(document, link, link_ancestors):
@@ -199,6 +199,7 @@ class DjangoTestHTTPTransport(HTTPTransport):
         path_params, query_params, body_params, header_params = _separate_params(method, link.fields, params)
         url = _expand_path_params(link.url, path_params)
         headers = _get_headers(url, decoders, self.credentials)
+        headers.update(self.headers)
         response = _make_http_request_with_test_client(url, method, headers, query_params, body_params)
         result = _decode_result_from_test_client(response, decoders, url)
 
