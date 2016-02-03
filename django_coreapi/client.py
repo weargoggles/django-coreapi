@@ -16,7 +16,7 @@ class DjangoCoreAPIClient(Client):
     def __init__(self, decoders=None, transports=None):
         if not transports:
             transports = [DjangoTestHTTPTransport()]
-        super().__init__(decoders, transports)
+        super(DjangoCoreAPIClient, self).__init__(decoders, transports)
 
     def get(self, url):
         url = _make_absolute(url)
