@@ -13,7 +13,6 @@ class CoreAPIJSONRenderer(BaseRenderer):
 
 class CoreAPIHTMLRenderer(BaseRenderer):
     media_type = 'text/html'
-    charset = None
 
     def render(self, data, media_type=None, renderer_context=None):
         codec = CoreHTMLCodec()
