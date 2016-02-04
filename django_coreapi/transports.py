@@ -87,19 +87,19 @@ def _get_headers(url, decoders=None, credentials=None):
     return headers
 
 
-def _handle_inplace_replacements(document, link, link_ancestors):
+def _handle_transform_replacements(document, link, link_ancestors):
     """
     Given a new document, and the link/ancestors it was created,
     determine if we should:
     * Make an inline replacement and then return the modified document tree.
     * Return the new document as-is.
     """
-    if link.inplace is None:
-        inplace = link.action.lower() in ('put', 'patch', 'delete')
+    if link.transform is None:
+        transform = link.action.lower() in ('put', 'patch', 'delete')
     else:
-        inplace = link.inplace
+        transform = link.transform
 
-    if inplace:
+    if transform:
         root = link_ancestors[0].document
         keys_to_link_parent = link_ancestors[-1].keys
         if document is None:
@@ -158,7 +158,7 @@ def _make_http_request_with_test_client(url, method, headers, query_params, form
         opts['data'] = query_params
     elif form_params:
         opts['data'] = json.dumps(form_params)
-        opts['CONTENT_TYPE'] = 'application/json'
+        opts['content_type'] = 'application/json'
 
     for key, value in headers.items():
         opts['HTTP_{}'.format(key.upper())] = value
@@ -204,7 +204,7 @@ class DjangoTestHTTPTransport(HTTPTransport):
         result = _decode_result_from_test_client(response, decoders, url)
 
         if isinstance(result, Document) and link_ancestors:
-            result = _handle_inplace_replacements(result, link, link_ancestors)
+            result = _handle_transform_replacements(result, link, link_ancestors)
 
         if isinstance(result, Error):
             raise ErrorMessage(result)

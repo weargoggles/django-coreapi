@@ -34,7 +34,7 @@ class DjangoCoreAPIClient(Client):
         transport = determine_transport(link.url, transports=self.transports)
         return transport.transition(link, decoders=self.decoders)
 
-    def action(self, document, keys, params=None, action=None, inplace=None):
+    def action(self, document, keys, params=None, action=None, transform=None):
         if isinstance(keys, string_types):
             keys = [keys]
 
@@ -42,13 +42,13 @@ class DjangoCoreAPIClient(Client):
         link, link_ancestors = _lookup_link(document, keys)
         url = _make_absolute(link.url)
 
-        if (action is not None) or (inplace is not None):
+        if (action is not None) or (transform is not None):
             # Handle any explicit overrides.
             action = link.action if (action is None) else action
-            inplace = link.inplace if (inplace is None) else inplace
-            link = Link(url, action, inplace, link.fields)
+            transform = link.transform if (transform is None) else transform
+            link = Link(url, action, transform, link.fields)
         else:
-            link = Link(url, link.action, link.inplace, link.fields)
+            link = Link(url, link.action, link.transform, link.fields)
 
         # Perform the action, and return a new document.
         transport = determine_transport(url, transports=self.transports)
