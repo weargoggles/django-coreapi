@@ -1,4 +1,5 @@
 import unittest
+from coreapi import Document, Field, Link
 from django.conf import settings
 settings.configure(ROOT_URLCONF='test_app', DEBUG=True, REST_FRAMEWORK={'UNAUTHENTICATED_USER': None})
 import django
@@ -17,4 +18,20 @@ class Tests(unittest.TestCase):
         transport = DjangoTestHTTPTransport(headers={'authorization': 'token'})
         client = DjangoCoreAPIClient(transports=[transport])
         doc = client.get('/headers/')
+        self.assertIsNotNone(doc)
+
+    def test_post_data(self):
+        content = {
+            'test': {
+                'post_data': Link(url='/post_data/', action='post', fields=[
+                    Field('data', location='body')
+                ]),
+            }
+        }
+        schema = Document(title='test', content=content)
+
+        client = DjangoCoreAPIClient()
+        doc = client.action(schema, ['test', 'post_data'], params={'data': {
+            'test': 'cat'
+        }})
         self.assertIsNotNone(doc)
