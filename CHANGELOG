@@ -1,3 +1,8 @@
+# 0.3.1
+
+- inplace was renamed to transform (core-api/python-client@522342f)
+- fixes post actions
+
 # 0.3.0
 
 - Allow setting headers in test client
