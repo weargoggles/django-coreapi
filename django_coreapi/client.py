@@ -1,25 +1,22 @@
 from coreapi import Client
 from coreapi.client import _lookup_link
-from coreapi.codecs import default_decoders
 from coreapi.compat import string_types
 from coreapi.document import Link
 from coreapi.transports import determine_transport
 from django_coreapi.transports import DjangoTestHTTPTransport
-import itypes
 
 
 def _make_absolute(url):
     if not url.startswith('http'):
-        url = 'http://testserver/' + url.rstrip('/')
+        url = 'http://testserver/' + url.lstrip('/')
     return url
 
 
 class DjangoCoreAPIClient(Client):
-    def __init__(self, decoders=None):
-        if decoders is None:
-            decoders = default_decoders
-        self._decoders = itypes.List(decoders)
-        self._transports = itypes.List([DjangoTestHTTPTransport()])
+    def __init__(self, decoders=None, transports=None):
+        if not transports:
+            transports = [DjangoTestHTTPTransport()]
+        super(DjangoCoreAPIClient, self).__init__(decoders, transports)
 
     def get(self, url):
         url = _make_absolute(url)
