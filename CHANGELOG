@@ -1,3 +1,8 @@
+# 0.4.0
+
+- support encoding parameter in client
+- provide mocking tool
+
 # 0.3.1
 
 - inplace was renamed to transform (core-api/python-client@522342f)
