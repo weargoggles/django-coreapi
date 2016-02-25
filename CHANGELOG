@@ -1,3 +1,7 @@
+# 0.5.0
+
+- mocking actions now requires a document as the first argument
+
 # 0.4.0
 
 - support encoding parameter in client
