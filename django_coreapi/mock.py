@@ -6,15 +6,15 @@ import django_coreapi.client
 _responses = []
 
 
-def get_match(keys):
+def get_match(document, keys):
     """
     Find the first matching response in the current set
     :param keys: the key path to be matched
     :return: the matching response or None
     """
     for response in _responses:
-        if response[0] == keys:
-            return response[1]
+        if response[:2] == (document.url, keys):
+            return response[-1]
 
 
 class Mock(object):
@@ -30,10 +30,10 @@ class Mock(object):
         self._real_django_client_action = django_coreapi.client.DjangoCoreAPIClient.action
 
         def fake_action(client, document, keys, *args, **kwargs):
-            res = get_match(keys)
+            res = get_match(document, keys)
             if res is not None:
                 return res
-            raise
+            raise Exception("No such mocked action")
 
         coreapi.Client.action = fake_action
         django_coreapi.client.DjangoCoreAPIClient.action = fake_action
@@ -61,6 +61,6 @@ def activate(f):
     return decorated
 
 
-def add(keys, response):
+def add(document, keys, response):
     global _responses
-    _responses.append((keys, response))
+    _responses.append((document.url, keys, response))
