@@ -5,6 +5,7 @@ MANIFEST
 dist/
 build/
 env/
+.eggs/
 html/
 htmlcov/
 *.egg-info/
