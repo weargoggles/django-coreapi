@@ -13,7 +13,7 @@ def get_match(document, keys):
     :return: the matching response or None
     """
     for response in _responses:
-        if response[:2] == [document.url, keys]:
+        if response[:2] == (document.url, keys):
             return response[-1]
 
 
@@ -33,7 +33,7 @@ class Mock(object):
             res = get_match(document, keys)
             if res is not None:
                 return res
-            raise
+            raise Exception("No such mocked action")
 
         coreapi.Client.action = fake_action
         django_coreapi.client.DjangoCoreAPIClient.action = fake_action

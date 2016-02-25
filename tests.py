@@ -39,7 +39,6 @@ class Tests(unittest.TestCase):
 
     @mock.activate
     def test_mocking(self):
-        mock.add(['test', 'post_data'], {"a": 1})
         content = {
             'test': {
                 'post_data': Link(url='/post_data/', action='post', fields=[
@@ -48,6 +47,7 @@ class Tests(unittest.TestCase):
             }
         }
         schema = Document(title='test', content=content)
+        mock.add(schema, ['test', 'post_data'], {"a": 1})
         client = DjangoCoreAPIClient()
         doc = client.action(schema, ['test', 'post_data'], params={'data': {
             'test': 'cat'
