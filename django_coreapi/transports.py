@@ -1,10 +1,11 @@
 from __future__ import unicode_literals
 from collections import OrderedDict
-from coreapi.codecs import default_decoders
+from coreapi import codecs
 from coreapi.document import Document, Object, Link, Array, Error
-from coreapi.transports.http import (
-    HTTPTransport, negotiate_decoder, ErrorMessage
-)
+
+from coreapi.utils import negotiate_decoder
+from coreapi.exceptions import ErrorMessage
+from coreapi.transports.http import HTTPTransport
 from rest_framework.test import APIClient
 import json
 import uritemplate
@@ -68,7 +69,7 @@ def _get_headers(url, decoders=None, credentials=None):
     Return a dictionary of HTTP headers to use in the outgoing request.
     """
     if decoders is None:
-        decoders = default_decoders
+        decoders = codecs
 
     accept = ', '.join([decoder.media_type for decoder in decoders])
 
@@ -178,7 +179,7 @@ def _decode_result_from_test_client(response, decoders=None, original_url=None):
             base_url = original_url
         # Content returned in response. We should decode it.
         content_type = response.get('content-type')
-        codec = negotiate_decoder(content_type, decoders=decoders)
+        codec = negotiate_decoder(decoders, content_type)
         result = codec.load(response.content, base_url=base_url)
     else:
         # No content returned in response.
@@ -198,7 +199,7 @@ class DjangoTestHTTPTransport(HTTPTransport):
         method = _get_http_method(link.action)
         path_params, query_params, body_params, header_params = _separate_params(method, link.fields, params)
         url = _expand_path_params(link.url, path_params)
-        headers = _get_headers(url, decoders, self.credentials)
+        headers = _get_headers(url, decoders, self._session.auth)
         headers.update(self.headers)
         response = _make_http_request_with_test_client(url, method, headers, query_params, body_params)
         result = _decode_result_from_test_client(response, decoders, url)
