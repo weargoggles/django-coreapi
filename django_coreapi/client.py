@@ -23,7 +23,7 @@ class DjangoCoreAPIClient(Client):
         link = Link(url, action='get')
 
         # Perform the action, and return a new document.
-        transport = determine_transport(link.url, transports=self.transports)
+        transport = determine_transport(self.transports, link.url)
         return transport.transition(link, decoders=self.decoders)
 
     def reload(self, document):
@@ -31,7 +31,7 @@ class DjangoCoreAPIClient(Client):
         link = Link(url, action='get')
 
         # Perform the action, and return a new document.
-        transport = determine_transport(link.url, transports=self.transports)
+        transport = determine_transport(self.transports, link.url)
         return transport.transition(link, decoders=self.decoders)
 
     def action(self, document, keys, params=None, action=None, encoding=None, transform=None):
@@ -50,5 +50,5 @@ class DjangoCoreAPIClient(Client):
             link = Link(url, action=action, encoding=encoding, transform=transform, fields=link.fields)
 
         # Perform the action, and return a new document.
-        transport = determine_transport(url, transports=self.transports)
+        transport = determine_transport(self.transports, url)
         return transport.transition(link, params, decoders=self.decoders, link_ancestors=link_ancestors)
