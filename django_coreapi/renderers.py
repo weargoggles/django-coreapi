@@ -1,4 +1,4 @@
-from coreapi.codecs import CoreHTMLCodec, CoreJSONCodec
+from coreapi.codecs import DisplayCodec, CoreJSONCodec
 from rest_framework.renderers import BaseRenderer
 
 
@@ -15,6 +15,6 @@ class CoreAPIHTMLRenderer(BaseRenderer):
     media_type = 'text/html'
 
     def render(self, data, media_type=None, renderer_context=None):
-        codec = CoreHTMLCodec()
+        codec = DisplayCodec()
 
         return codec.dump(data)
