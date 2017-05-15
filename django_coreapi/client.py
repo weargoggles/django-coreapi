@@ -2,7 +2,7 @@ from coreapi import Client
 from coreapi.client import _lookup_link
 from coreapi.compat import string_types
 from coreapi.document import Link
-from coreapi.transports import determine_transport
+from coreapi.utils import determine_transport
 from django_coreapi.transports import DjangoTestHTTPTransport
 
 
