@@ -1,7 +1,7 @@
 import unittest
 from coreapi import Document, Field, Link
 from django.conf import settings
-settings.configure(ROOT_URLCONF='test_app', DEBUG=True, REST_FRAMEWORK={'UNAUTHENTICATED_USER': None})
+settings.configure(ROOT_URLCONF='test_app', DEBUG=True, REST_FRAMEWORK={'UNAUTHENTICATED_USER': None}, ALLOWED_HOSTS='*')
 import django
 django.setup()
 from django_coreapi import mock
