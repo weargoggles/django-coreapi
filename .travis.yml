@@ -4,7 +4,9 @@ python:
 - '2.7'
 - '3.4'
 - pypy
-script: python setup.py test
+script:
+    - pip install --upgrade pip
+    - python setup.py test
 deploy:
   provider: pypi
   user: weargoggles
